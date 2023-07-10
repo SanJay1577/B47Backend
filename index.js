@@ -1,48 +1,33 @@
-const fs = require("fs");
-console.log("i'm working good");
+//import express from "express"
+const express = require("express");
+const fs = require("fs")
+//initlising server
+const app = express();
 
-const [, , arg1, arg2] = process.argv;
+const PORT = 8080;
 
-function sum(num1, num2) {
-  const value = parseInt(num1) + parseInt(num2);
-  console.log(`The sum is ${value}`);
-}
-
-sum(arg1, arg2);
-
-// to read a existing file
-fs.readFile("./sample.txt", "utf-8", (err, data) => {
-  if (err) {
-    console.log(`Error occured : ${err}`);
-  } else {
-    console.log(data);
-  }
-});
-// to create a new file
-const content = "Hey I'm writted by node js file system";
-fs.writeFile("./newTextFile.txt", content, (err) => {
-  if (err) {
-    console.log(`Error occured : ${err}`);
-  } else {
-    console.log("File Writted succesfully");
-  }
-});
-
-const appendContent = `\nHey I was edited by node js file system`;
-// to edit a file
-fs.appendFile("./newTextFile.txt", appendContent, (err) => {
-  if (err) {
-    console.log(`Error occured : ${err}`);
-  } else {
-    console.log("File updated succesfully");
-  }
-});
-
-// delete a file.
-fs.unlink("./newTextFile.txt", (err)=>{
-    if (err) {
-        console.log(`Error occured : ${err}`);
-      } else {
-        console.log("File deleted succesfully");
+//Server endpoint
+app.get("/", (req, res)=>{
+  let date = new Date();
+  let content = date.toUTCString();
+  fs.writeFile("./currentTime.txt",content , (err)=>{
+      if(err){
+        res.send("Error Occured", err);
+      }else {
+        fs.readFile("./currentTime.txt","utf-8", (err, data) => {
+          if (err) {
+             res.send(`Error occured inm reading : ${err}`);
+          } else {
+            res.send(data);
+          }
+        } )
       }
+  }); 
+
+  
 })
+
+
+
+//start the server
+app.listen(PORT, ()=>console.log(`Server started in localhost:${PORT}`));
