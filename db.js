@@ -1,13 +1,15 @@
 import { MongoClient } from "mongodb";
+import dotenv from "dotenv";
 
-const connectionString = "mongodb://127.0.0.1:27017/";
+dotenv.config;
 
- async function mongoConnection(){
-    const client = new MongoClient(connectionString);
-    await client.connect();
-    console.log("Database connected successfully");
-    return client;
+const connectionString = process.env.CONNECTION_URL;
+async function mongoConnection() {
+  const client = new MongoClient(connectionString);
+  await client.connect();
+  console.log("Database connected successfully");
+  return client;
 }
 
 //initializing DB
-export const client = await mongoConnection(); 
+export const client = await mongoConnection();

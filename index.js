@@ -1,13 +1,15 @@
 import express from "express";
 import cors from "cors"
 import {studentRouter} from "./Routes/students.js"
-
-
+import dotenv from "dotenv"
 
 //initializing express server
 const app = express();
 
-const PORT = 8080;
+//environmental configurations
+dotenv.config();
+
+const PORT = process.env.PORT;
 
 //middlewares
 app.use(express.json());

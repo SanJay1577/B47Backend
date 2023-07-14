@@ -56,6 +56,7 @@ router.post("/add", async (req, res) => {
   }
 });
 
+// edit a student details 
 router.put("/edit/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -71,6 +72,7 @@ router.put("/edit/:id", async (req, res) => {
   }
 });
 
+// delete a student details
 router.delete("/delete/:id", async (req, res) => {
   try {
     const { id } = req.params;
