@@ -6,6 +6,7 @@ import {
   getAllStudents,
   getStudentbyId,
 } from "../Controllers/students.js";
+import jwt from "jsonwebtoken";
 //initializing router
 const router = express.Router();
 
@@ -56,7 +57,7 @@ router.post("/add", async (req, res) => {
   }
 });
 
-// edit a student details 
+// edit a student details
 router.put("/edit/:id", async (req, res) => {
   try {
     const { id } = req.params;
